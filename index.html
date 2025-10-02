@@ -16,7 +16,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="vpa-icon.ico">
   <link rel="shortcut icon" type="image/x-icon" href="vpa-icon.ico">
-  <!-- Mobile Theme Color -->
   <meta name="theme-color" content="#7f1d1d">
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -61,8 +60,8 @@
         <p class="text-gray-300">VPA Mask</p>
       </div>
       <div class="flex flex-col items-center">
-        <img src="VPA Mask.jpg" alt="VPA Mask Variant" class="rounded-xl shadow-lg mb-4">
-        <p class="text-gray-300">VPA Mask Variant</p>
+        <img src="VPA Mask.jpg" alt="VPA Boots" class="rounded-xl shadow-lg mb-4">
+        <p class="text-gray-300">VPA Boots</p>
       </div>
     </div>
   </section>
@@ -75,9 +74,9 @@
       fetch('premier-division.json')
         .then(res => res.json())
         .then(data => {
-          let html = '<div class="max-w-2xl mx-auto overflow-x-auto"><table class="w-full text-left border-collapse"><thead><tr class="bg-red-800 text-white"><th class="p-3">#</th><th class="p-3">Club</th></tr></thead><tbody class="bg-gray-800 text-gray-200">';
+          let html = '<div class="max-w-2xl mx-auto overflow-x-auto"><table class="w-full text-left border-collapse"><thead><tr class="bg-red-800 text-white"><th class="p-3">#</th><th class="p-3">Club</th><th class="p-3">Points</th></tr></thead><tbody class="bg-gray-800 text-gray-200">';
           data.forEach(team => {
-            html += `<tr class="border-b border-gray-700"><td class="p-3">${team.rank}</td><td class="p-3">${team.team}</td></tr>`;
+            html += `<tr class="border-b border-gray-700"><td class="p-3">${team.rank}</td><td class="p-3">${team.team}</td><td class="p-3">${team.points}</td></tr>`;
           });
           html += '</tbody></table></div>';
           document.getElementById('premier-division').innerHTML = html;
