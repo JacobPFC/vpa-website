@@ -76,7 +76,8 @@
         .then(data => {
           let html = '<div class="max-w-2xl mx-auto overflow-x-auto"><table class="w-full text-left border-collapse"><thead><tr class="bg-red-800 text-white"><th class="p-3">#</th><th class="p-3">Club</th><th class="p-3">Points</th></tr></thead><tbody class="bg-gray-800 text-gray-200">';
           data.forEach(team => {
-            html += `<tr class="border-b border-gray-700"><td class="p-3">${team.rank}</td><td class="p-3">${team.team}</td><td class="p-3">${team.points}</td></tr>`;
+            let points = team.points !== undefined ? team.points : 0;
+            html += `<tr class="border-b border-gray-700"><td class="p-3">${team.rank}</td><td class="p-3">${team.team}</td><td class="p-3">${points}</td></tr>`;
           });
           html += '</tbody></table></div>';
           document.getElementById('premier-division').innerHTML = html;
