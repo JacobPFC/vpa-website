@@ -150,6 +150,29 @@
     </div>
   </section>
 
+  <!-- Giveaways Section -->
+  <section class="py-16 px-6 bg-gray-950">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Current Giveaways</h2>
+    <div id="giveaways" class="max-w-4xl mx-auto text-gray-300 space-y-6"></div>
+
+    <script>
+      fetch('giveaways.json')
+        .then(res => res.json())
+        .then(data => {
+          let html = '';
+          data.forEach(g => {
+            html += `<div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+              <h3 class="text-xl font-semibold text-red-300 mb-2">${g.title}</h3>
+              <p>Ends: <span class="font-bold text-red-300">${g.endDate}</span></p>
+              <p>How to enter: ${g.instructions}</p>
+              <p>Prizes: ${g.prizes.join(', ')}</p>
+            </div>`;
+          });
+          document.getElementById('giveaways').innerHTML = html;
+        });
+    </script>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-gray-800 py-6 text-center text-gray-400 text-sm">
     <p>&copy; 2025 VRFS League - VPA. All rights reserved.</p>
@@ -157,4 +180,3 @@
 
 </body>
 </html>
-
