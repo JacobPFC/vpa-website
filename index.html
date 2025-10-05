@@ -3,93 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VPA League | VRFS</title>
+  <title>VPA | Virtual Premier Association</title>
   <link rel="icon" type="image/x-icon" href="vpa-icon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background: linear-gradient(135deg, #200000, #3b0000);
-      background-image: url('intro-back.png');
-      background-size: cover;
-      background-blend-mode: multiply;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
 </head>
-
-<body class="text-white font-sans">
+<body class="bg-black text-white font-sans">
 
   <!-- Header -->
-  <header class="text-center py-10 bg-black bg-opacity-70">
-    <img src="VPA Transparent.png" alt="VPA Logo" class="mx-auto w-48 mb-4">
-    <h1 class="text-4xl font-bold text-red-400">Virtual Premier Association (VPA)</h1>
-    <p class="text-gray-300 mt-2">An Official VRFS League Partnered with Sportwave</p>
+  <header class="relative h-screen flex flex-col justify-center items-center text-center bg-cover bg-center" style="background-image: linear-gradient(rgba(80,0,0,0.75), rgba(0,0,0,0.85)), url('intro-back.png');">
+    <img src="VPA Transparent.png" alt="VPA Logo" class="w-48 mb-6 drop-shadow-xl">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-red-400 mb-4">Virtual Premier Association</h1>
+    <p class="text-lg md:text-xl text-gray-300 mb-8">One of the biggest leagues in the VRFS universe.</p>
+    <a href="https://discord.gg/V4ctGgDRSq" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300">Join the Discord</a>
   </header>
 
-  <!-- About VRFS Section -->
-  <section class="py-16 px-6 bg-gray-950">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">About VRFS</h2>
-    <div class="max-w-4xl mx-auto text-gray-300 text-lg leading-relaxed text-center space-y-6">
-      <p>
-        <span class="font-bold text-red-400">VRFS (Virtual Real Football Simulator)</span> is an immersive multiplayer football game that blends realism, creativity, and competition. 
-        Built by and for players, it gives users full control over their gameplay, teams, and community experiences.
+  <!-- Sportwave Section -->
+  <section class="py-16 px-6 bg-gray-950 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-red-400 mb-10">Partnered with Sportwave</h2>
+    <div class="flex flex-col items-center space-y-6">
+      <img src="Sportwave Logo.png" alt="Sportwave Logo" class="w-40 mb-4">
+      <p class="text-gray-300 max-w-2xl">
+        VPA is proudly partnered with Sportwave — the platform that brings every VRFS match to life.  
+        Watch live games, highlights, and exclusive VPA content streamed directly through Sportwave.
       </p>
-      <p>
-        Players take to the pitch with precise movement, teamwork, and strategy — every pass, tackle, and shot controlled in real time. 
-        Whether you’re a club owner, a tactical coach, or a star striker, VRFS delivers a true-to-life football experience in a virtual world.
-      </p>
-      <p>
-        The <span class="font-semibold text-red-400">Virtual Premier Association (VPA)</span> is one of the top leagues within VRFS, 
-        featuring some of the best-managed clubs, talented kit designers, and over <span class="font-semibold text-red-400">6,800 active players</span>. 
-        The league emphasizes fair play, creativity, and collaboration — the essence of what VRFS stands for.
-      </p>
-      <p>
-        Matches and tournaments are streamed live on <span class="font-semibold text-red-400">Sportwave</span>, 
-        the official broadcast platform for VRFS leagues, where fans can catch every highlight, transfer update, and knockout game.
-      </p>
-      <a href="https://discord.gg/V4ctGgDRSq" target="_blank" 
-         class="inline-block mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-xl shadow-lg transition">
-        Join the VPA Discord
-      </a>
     </div>
   </section>
 
   <!-- Premier Division Table -->
   <section class="py-16 px-6 bg-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Premier Division</h2>
-    <div class="max-w-2xl mx-auto">
-      <table class="w-full text-center border-collapse bg-gray-800 rounded-xl overflow-hidden shadow-lg">
-        <thead class="bg-red-700 text-white">
-          <tr>
-            <th class="py-3 px-4">Rank</th>
-            <th class="py-3 px-4">Team</th>
-            <th class="py-3 px-4">Points</th>
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">VPA Premier Division</h2>
+    <div class="max-w-2xl mx-auto overflow-x-auto">
+      <table class="min-w-full border border-gray-700 text-center">
+        <thead>
+          <tr class="bg-red-700 text-white">
+            <th class="py-3 px-4 border-b border-gray-700">Rank</th>
+            <th class="py-3 px-4 border-b border-gray-700">Team</th>
+            <th class="py-3 px-4 border-b border-gray-700">Points</th>
           </tr>
         </thead>
-        <tbody id="premier-table" class="text-gray-200"></tbody>
+        <tbody id="premier-division"></tbody>
       </table>
     </div>
 
     <script>
-      fetch('teams.json')
+      fetch('premier-division.json')
         .then(res => res.json())
         .then(data => {
-          let html = '';
-          data.forEach(team => {
-            html += `
-              <tr class="hover:bg-gray-700 transition">
-                <td class="py-2">${team.rank}</td>
-                <td class="py-2">${team.team}</td>
-                <td class="py-2 text-red-400 font-semibold">${team.points}</td>
-              </tr>`;
-          });
-          document.getElementById('premier-table').innerHTML = html;
+          const table = document.getElementById('premier-division');
+          table.innerHTML = data.map(team => `
+            <tr class="hover:bg-gray-800 transition">
+              <td class="py-2 border-b border-gray-700">${team.rank}</td>
+              <td class="py-2 border-b border-gray-700">${team.team}</td>
+              <td class="py-2 border-b border-gray-700">${team.points}</td>
+            </tr>
+          `).join('');
         });
     </script>
   </section>
@@ -97,78 +64,66 @@
   <!-- Customs Carousel -->
   <section class="py-16 px-6 bg-gray-950">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">VPA Customs</h2>
-    <div class="flex space-x-8 overflow-x-auto scrollbar-hide px-4 max-w-7xl mx-auto">
-      <div class="flex-shrink-0 w-64 text-center">
+    <div class="flex overflow-x-auto space-x-8 px-6 scrollbar-hide">
+      <div class="flex-none w-64 text-center">
         <img src="VPA Hat.jpg" alt="VPA Hat" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Hat</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="VPA Glasses.jpg" alt="VPA Glasses" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Glasses</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="VPA Mask.jpg" alt="VPA Mask" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Mask</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="vpa-boots.jpg" alt="VPA Boots" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Boots</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="vpa-ball.png" alt="VPA Ball" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Ball</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="vpa-graffiti-mask.webp" alt="VPA Graffiti Mask" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Graffiti Mask</p>
       </div>
-      <div class="flex-shrink-0 w-64 text-center">
+      <div class="flex-none w-64 text-center">
         <img src="vpa-gloves.webp" alt="VPA Gloves" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Gloves</p>
       </div>
     </div>
-    <p class="text-center text-gray-400 mt-6">Scroll sideways to view more customs →</p>
   </section>
 
-  <!-- Discord Rules Section -->
-  <section class="py-16 px-6 bg-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Discord Rules</h2>
-    <div class="max-w-4xl mx-auto space-y-8 text-gray-300">
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Respect Everyone</h3>
-        <p>Respect everyone and everything whilst in the Discord. This includes any toxicity such as harassment, bullying, or abuse towards another person.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Use Appropriate Language</h3>
-        <p>Do not use hateful or hurtful language or any derogatory slurs. Everyone deserves respect regardless of background or identity.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Be Mindful</h3>
-        <p>Be considerate in chat; avoid offensive topics such as religion, gender, or race that could upset others.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Tolerance</h3>
-        <p>Members should remain tolerant and respectful of differing perspectives and opinions.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Reporting</h3>
-        <p>If you encounter issues or conflicts, open a support ticket to alert moderators.</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Advertisement</h3>
-        <p>No advertising of any kind — links, servers, or promotions — regardless of role or rank.</p>
-      </div>
-      <div class="mt-6 p-4 bg-gray-800 rounded-xl shadow-lg text-center">
-        <p class="text-red-400 font-semibold">Breaking these rules may result in a strike or disciplinary action.</p>
-        <p class="mt-2">Follow the official <a href="https://discord.com/guidelines" target="_blank" class="text-red-300 underline">Discord Rules & TOS</a>.</p>
-      </div>
+  <!-- Discord Rules -->
+  <section class="py-16 px-8 bg-gray-900">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-8">Discord Rules</h2>
+    <div class="max-w-4xl mx-auto text-gray-300 space-y-6 leading-relaxed">
+      <p><strong>Respect Everyone:</strong> Respect everyone in the community. Any form of harassment, bullying, or abuse is not tolerated. We want this to be a safe space for all players.</p>
+      <p><strong>Use Appropriate Language:</strong> Avoid hateful or offensive language. Slurs or derogatory terms are not allowed regardless of background or intent.</p>
+      <p><strong>Be Mindful:</strong> Conversations around sensitive topics such as religion, gender, or race should be handled with care or avoided.</p>
+      <p><strong>Tolerance:</strong> Everyone should be respectful of different perspectives and opinions.</p>
+      <p><strong>Reporting:</strong> If you encounter a problem, please report it by opening a ticket to alert moderators.</p>
+      <p><strong>Advertisement:</strong> No advertising or external links are allowed without staff approval.</p>
+      <p>If anyone breaks these rules, they will receive a strike and an appropriate punishment.  
+      <br><br>Make sure to also follow Discord’s official <a href="https://discord.com/guidelines" target="_blank" class="text-red-400 underline">Guidelines</a> and Terms of Service.</p>
+    </div>
+  </section>
+
+  <!-- VRFS Section -->
+  <section class="py-16 px-8 bg-gray-950">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">About VRFS</h2>
+    <div class="max-w-4xl mx-auto text-gray-300 space-y-6 leading-relaxed">
+      <p><strong>VRFS (Virtual Real Football Simulator)</strong> is the cutting-edge virtual football experience that powers the VPA league. Built on immersive simulation and competitive realism, VRFS allows players to control their avatars, manage clubs, and compete in organized leagues that mirror real-world football drama.</p>
+      <p>The game thrives on its passionate community — from skilled kit makers to creative managers and active clubs — making every match a story. VPA stands as one of VRFS’s flagship leagues, where talent meets strategy and every season pushes the competitive scene forward.</p>
+      <p>Whether you’re a player, manager, or fan, VRFS is where football meets creativity, and leagues like VPA showcase how far the virtual game can go.</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-8 bg-black bg-opacity-70 text-gray-400">
-    <img src="Sportwave Logo.png" alt="Sportwave Logo" class="mx-auto w-24 mb-3">
-    <p>Partnered with Sportwave — The Home of Virtual Football</p>
+  <footer class="py-8 bg-black text-center text-gray-500 border-t border-gray-800">
+    <p>&copy; 2025 VPA | Powered by Sportwave & VRFS</p>
   </footer>
 
 </body>
