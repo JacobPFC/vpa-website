@@ -6,8 +6,23 @@
   <title>VPA | Virtual Premier Association</title>
   <link rel="icon" type="image/x-icon" href="vpa-icon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #200000, #3b0000);
+      background-image: url('intro-back.png');
+      background-size: cover;
+      background-blend-mode: multiply;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 </head>
-<body class="bg-black text-white font-sans">
+<body class="text-white font-sans">
 
   <!-- Header -->
   <header class="relative h-screen flex flex-col justify-center items-center text-center bg-cover bg-center" style="background-image: linear-gradient(rgba(80,0,0,0.75), rgba(0,0,0,0.85)), url('intro-back.png');">
@@ -54,7 +69,7 @@
             <tr class="hover:bg-gray-800 transition">
               <td class="py-2 border-b border-gray-700">${team.rank}</td>
               <td class="py-2 border-b border-gray-700">${team.team}</td>
-              <td class="py-2 border-b border-gray-700">${team.points}</td>
+              <td class="py-2 border-b border-gray-700 text-red-400 font-semibold">${team.points}</td>
             </tr>
           `).join('');
         });
@@ -64,7 +79,7 @@
   <!-- Customs Carousel -->
   <section class="py-16 px-6 bg-gray-950">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">VPA Customs</h2>
-    <div class="flex overflow-x-auto space-x-8 px-6 scrollbar-hide">
+    <div id="carousel" class="flex overflow-x-auto space-x-8 px-6 scrollbar-hide">
       <div class="flex-none w-64 text-center">
         <img src="VPA Hat.jpg" alt="VPA Hat" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Hat</p>
@@ -78,7 +93,7 @@
         <p class="text-gray-300">VPA Mask</p>
       </div>
       <div class="flex-none w-64 text-center">
-        <img src="vpa-boots.jpg" alt="VPA Boots" class="rounded-xl shadow-lg mb-3">
+        <img src="VPA Boots.jpg" alt="VPA Boots" class="rounded-xl shadow-lg mb-3">
         <p class="text-gray-300">VPA Boots</p>
       </div>
       <div class="flex-none w-64 text-center">
@@ -95,6 +110,19 @@
       </div>
     </div>
   </section>
+
+  <script>
+    // Auto-scroll carousel
+    const carousel = document.getElementById('carousel');
+    let scrollAmount = 0;
+    function autoScroll() {
+      scrollAmount += 0.5; // Adjust speed here
+      if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) scrollAmount = 0;
+      carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      requestAnimationFrame(autoScroll);
+    }
+    requestAnimationFrame(autoScroll);
+  </script>
 
   <!-- Discord Rules -->
   <section class="py-16 px-8 bg-gray-900">
@@ -115,9 +143,9 @@
   <section class="py-16 px-8 bg-gray-950">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">About VRFS</h2>
     <div class="max-w-4xl mx-auto text-gray-300 space-y-6 leading-relaxed">
-      <p><strong>VRFS (Virtual Real Football Simulator)</strong> is the cutting-edge virtual football experience that powers the VPA league. Built on immersive simulation and competitive realism, VRFS allows players to control their avatars, manage clubs, and compete in organized leagues that mirror real-world football drama.</p>
-      <p>The game thrives on its passionate community — from skilled kit makers to creative managers and active clubs — making every match a story. VPA stands as one of VRFS’s flagship leagues, where talent meets strategy and every season pushes the competitive scene forward.</p>
-      <p>Whether you’re a player, manager, or fan, VRFS is where football meets creativity, and leagues like VPA showcase how far the virtual game can go.</p>
+      <p><strong>VRFS (Virtual Real Football Simulator)</strong> is the immersive virtual football game behind the VPA. Players manage clubs, control avatars, and compete in realistic leagues where strategy and teamwork matter.</p>
+      <p>VPA is one of VRFS’s flagship leagues, showcasing top talent, creative kits, and over <strong class="text-red-400">6,800 active players</strong>. Every match combines skill, creativity, and competition in a shared football universe.</p>
+      <p>Join the league, participate in matches, or just watch the action — VRFS brings football to life in a virtual community that thrives on passion and fair play.</p>
     </div>
   </section>
 
