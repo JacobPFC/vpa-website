@@ -15,7 +15,6 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="vpa-icon.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="vpa-icon.ico">
   <meta name="theme-color" content="#7f1d1d">
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -96,25 +95,6 @@
     </script>
   </section>
 
-  <!-- News Section -->
-  <section class="py-16 px-6 bg-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">League News & Updates</h2>
-    <div class="max-w-4xl mx-auto space-y-8">
-      <article class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Season Kickoff Announced</h3>
-        <p class="text-gray-300">The new VPA season kicks off soon! Fixtures and schedules will be posted here once finalized. Get ready for another round of intense competition.</p>
-      </article>
-      <article class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h3 class="text-xl font-semibold text-red-300 mb-2">New Kits Released</h3>
-        <p class="text-gray-300">Our talented kit makers have designed stunning new kits for this season. Check them out in the customs section and show your team pride.</p>
-      </article>
-      <article class="bg-gray-800 rounded-xl p-6 shadow-lg">
-        <h3 class="text-xl font-semibold text-red-300 mb-2">Community Spotlight</h3>
-        <p class="text-gray-300">With 6.8k+ members, the VPA community is thriving. Join the Discord to connect, share ideas, and take part in exciting events.</p>
-      </article>
-    </div>
-  </section>
-
   <!-- Discord Rules Section -->
   <section class="py-16 px-6 bg-gray-900">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Discord Rules</h2>
@@ -148,29 +128,6 @@
         <p class="mt-2">Make sure to also follow the official <a href="https://discord.com/guidelines" target="_blank" class="text-red-300 underline">Discord Rules & TOS</a>.</p>
       </div>
     </div>
-  </section>
-
-  <!-- Giveaways Section -->
-  <section class="py-16 px-6 bg-gray-950">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Current Giveaways</h2>
-    <div id="giveaways" class="max-w-4xl mx-auto text-gray-300 space-y-6"></div>
-
-    <script>
-      fetch('giveaways.json')
-        .then(res => res.json())
-        .then(data => {
-          let html = '';
-          data.forEach(g => {
-            html += `<div class="bg-gray-800 p-6 rounded-xl shadow-lg">
-              <h3 class="text-xl font-semibold text-red-300 mb-2">${g.title}</h3>
-              <p>Ends: <span class="font-bold text-red-300">${g.endDate}</span></p>
-              <p>How to enter: ${g.instructions}</p>
-              <p>Prizes: ${g.prizes.join(', ')}</p>
-            </div>`;
-          });
-          document.getElementById('giveaways').innerHTML = html;
-        });
-    </script>
   </section>
 
   <!-- Footer -->
