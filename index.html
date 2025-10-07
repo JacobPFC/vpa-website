@@ -32,7 +32,7 @@
     <a href="https://discord.gg/V4ctGgDRSq" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300">Join the Discord</a>
   </header>
 
-  <!-- Sportwave Section -->
+  <!-- Sportwave Partnership -->
   <section class="py-16 px-6 bg-gray-950 text-center">
     <h2 class="text-3xl md:text-4xl font-bold text-red-400 mb-10">Partnered with Sportwave</h2>
     <div class="flex flex-col items-center space-y-6">
@@ -44,7 +44,7 @@
     </div>
   </section>
 
-  <!-- Premier Division Table -->
+  <!-- Premier Division -->
   <section class="py-16 px-6 bg-gray-900">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">VPA Premier Division</h2>
     <div class="max-w-2xl mx-auto overflow-x-auto">
@@ -76,7 +76,43 @@
     </script>
   </section>
 
-  <!-- Customs Carousel -->
+  <!-- Giveaways Section -->
+  <section id="giveaways-section" class="py-16 px-6 bg-gray-950 hidden">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">Giveaways</h2>
+    <div id="giveaways-container" class="max-w-4xl mx-auto space-y-6 text-gray-300"></div>
+  </section>
+
+  <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1_pgDdW5hrHy-5qiizCdl0_8ulMQpaHAFbcVW7NKfP6a184WU-U3OeGpOyAf2P7XjK_Sf9B7zAeQ_/gviz/tq?tqx=out:json&sheet=Sheet1';
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(txt => {
+        const json = JSON.parse(txt.substring(txt.indexOf('(') + 1, txt.lastIndexOf(')')));
+        const rows = json.table.rows;
+        if (!rows || rows.length === 0) return;
+        let html = '';
+        rows.forEach(row => {
+          const title = row.c[0]?.v || '';
+          const prize = row.c[1]?.v || '';
+          const ends = row.c[2]?.v || '';
+          const status = row.c[3]?.v || '';
+          html += `
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+              <h3 class="text-xl font-semibold text-red-300 mb-2">${title}</h3>
+              <p><strong>Prize:</strong> ${prize}</p>
+              <p><strong>Ends:</strong> ${ends}</p>
+              <p><strong>Status:</strong> ${status}</p>
+            </div>`;
+        });
+        if (html.trim() !== '') {
+          document.getElementById('giveaways-section').classList.remove('hidden');
+          document.getElementById('giveaways-container').innerHTML = html;
+        }
+      })
+      .catch(() => console.log('Giveaways not available — section hidden.'));
+  </script>
+
+  <!-- Customs -->
   <section class="py-16 px-6 bg-gray-950">
     <h2 class="text-3xl md:text-4xl font-bold text-center text-red-400 mb-10">VPA Customs</h2>
     <div id="carousel" class="flex overflow-x-auto space-x-8 px-6 scrollbar-hide">
@@ -112,11 +148,10 @@
   </section>
 
   <script>
-    // Auto-scroll carousel
     const carousel = document.getElementById('carousel');
     let scrollAmount = 0;
     function autoScroll() {
-      scrollAmount += 0.5; // Adjust speed here
+      scrollAmount += 0.5;
       if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) scrollAmount = 0;
       carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
       requestAnimationFrame(autoScroll);
